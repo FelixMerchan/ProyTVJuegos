@@ -94,9 +94,9 @@ public class frmPrincipal extends JFrame {
 	private JPanel getPanelMenu() {
 		if (panelMenu == null) {
 			lbimg_curso = new JLabel();
-			lbimg_curso.setBounds(new Rectangle(6, 318, 62, 65));
+			lbimg_curso.setBounds(new Rectangle(2, 313, 62, 65));
 			lbimg_curso.setText("");
-			lbimg_curso.setIcon(new ImageIcon(getClass().getResource("/Recursos/curso.png")));
+			lbimg_curso.setIcon(new ImageIcon(getClass().getResource("/Recursos/vendedor.png")));
 			lbimg_salir = new JLabel();
 			lbimg_salir.setBounds(new Rectangle(4, 393, 64, 56));
 			lbimg_salir.setText("");
@@ -105,17 +105,17 @@ public class frmPrincipal extends JFrame {
 			lbimg_matri.setText("");
 			lbimg_matri.setLocation(new Point(1, 244));
 			lbimg_matri.setSize(new Dimension(64, 65));
-			lbimg_matri.setIcon(new ImageIcon(getClass().getResource("/Recursos/matricula.png")));
+			lbimg_matri.setIcon(new ImageIcon(getClass().getResource("/Recursos/factura11.png")));
 			lbimg_estudiante = new JLabel();
 			lbimg_estudiante.setText("");
 			lbimg_estudiante.setSize(new Dimension(66, 68));
 			lbimg_estudiante.setLocation(new Point(2, 102));
-			lbimg_estudiante.setIcon(new ImageIcon(getClass().getResource("/Recursos/estudiante.png")));
+			lbimg_estudiante.setIcon(new ImageIcon(getClass().getResource("/Recursos/cliente.png")));
 			lbimg_repre = new JLabel();
 			lbimg_repre.setText("");
 			lbimg_repre.setSize(new Dimension(64, 65));
 			lbimg_repre.setLocation(new Point(1, 176));
-			lbimg_repre.setIcon(new ImageIcon(getClass().getResource("/Recursos/representante.png")));
+			lbimg_repre.setIcon(new ImageIcon(getClass().getResource("/Recursos/gamepad11.png")));
 			panelMenu = new JPanel();
 			panelMenu.setLayout(null);
 			panelMenu.setPreferredSize(new Dimension(225, 0));
@@ -282,7 +282,7 @@ public class frmPrincipal extends JFrame {
 			btHome.setPreferredSize(new Dimension(0, 0));
 			btHome.setContentAreaFilled(false);
 			btHome.setHorizontalTextPosition(SwingConstants.CENTER);
-			btHome.setIcon(new ImageIcon(getClass().getResource("/Recursos/home-button.png")));
+			btHome.setIcon(new ImageIcon(getClass().getResource("/Recursos/Tienda22.png")));
 			btHome.setText("");
 			btHome.setLocation(new Point(56, 9));
 			btHome.setSize(new Dimension(100, 100));
