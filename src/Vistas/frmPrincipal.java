@@ -247,7 +247,7 @@ public class frmPrincipal extends JFrame {
 			btMatricula.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
 			btMatricula.setRolloverEnabled(true);
 			btMatricula.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
-			btMatricula.setText("Matrícula");
+			btMatricula.setText("Factura");
 			btMatricula.setLocation(new Point(20, 245));
 			btMatricula.setSize(new Dimension(214, 64));
 			btMatricula.setBackground(new Color(0, 51, 153));
