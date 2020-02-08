@@ -68,7 +68,7 @@ public class frmPrincipal extends JFrame {
 		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Recursos/icono app.png")));
 		this.setResizable(true);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Sistema Académico");
+		this.setTitle("Sistema Tienda Video Juegos");
 	}
 
 	/**
