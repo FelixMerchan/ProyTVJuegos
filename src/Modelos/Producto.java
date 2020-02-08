@@ -7,6 +7,7 @@ package Modelos;
  */
 public class Producto {
 
+	//datos globales
 	public String codigo;
 	public String nombre;
 	public String descripcion;
@@ -15,6 +16,14 @@ public class Producto {
 	public String marca;
 	public String categoria;
 	public int iva;
+
+	//constructores
+
+	//constructor vacio
+
+	public Producto (){}
+
+	//constructor comun
 
 	public Producto(String codigo, String nombre, String descripcion, double cantidad,
 			        double precio, String marca, String categoria, int iva)
