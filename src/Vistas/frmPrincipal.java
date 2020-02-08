@@ -33,7 +33,7 @@ public class frmPrincipal extends JFrame {
 	private JLabel lbimg_repre = null;
 	private JLabel lbimg_estudiante = null;
 	private JLabel lbimg_matri = null;
-	private JButton btMatricula = null;
+	private JButton btFactura = null;
 	private JButton btHome = null;
 	private JPanel panelPie = null;
 	private JLabel lbPie = null;
@@ -41,7 +41,7 @@ public class frmPrincipal extends JFrame {
 	private JButton btSalir = null;
 	private JLabel lbimg_salir = null;
 	private JLabel lbimg_curso = null;
-	private JButton btCurso = null;
+	private JButton btVendedor = null;
 
 
 	/**
@@ -128,13 +128,13 @@ public class frmPrincipal extends JFrame {
 			panelMenu.add(getBtProducto(), null);
 
 			panelMenu.add(lbimg_matri, null);
-			panelMenu.add(getBtMatricula(), null);
+			panelMenu.add(getBtFactura(), null);
 			panelMenu.add(getBtHome(), null);
 			panelMenu.add(lbimg_salir, null);
 			panelMenu.add(getBtSalir(), null);
 
 			panelMenu.add(lbimg_curso, null);
-			panelMenu.add(getBtCurso(), null);
+			panelMenu.add(getBtVendedor(), null);
 		}
 		return panelMenu;
 	}
@@ -233,31 +233,31 @@ public class frmPrincipal extends JFrame {
 	}
 
 	/**
-	 * This method initializes btMatricula
+	 * This method initializes btFactura
 	 *
 	 * @return javax.swing.JButton
 	 */
-	private JButton getBtMatricula() {
-		if (btMatricula == null) {
-			btMatricula = new JButton();
-			btMatricula.setFont(new Font("Arial Black", Font.PLAIN, 14));
-			btMatricula.setForeground(Color.white);
-			btMatricula.setHorizontalAlignment(SwingConstants.CENTER);
-			btMatricula.setHorizontalTextPosition(SwingConstants.CENTER);
-			btMatricula.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
-			btMatricula.setRolloverEnabled(true);
-			btMatricula.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
-			btMatricula.setText("Factura");
-			btMatricula.setLocation(new Point(20, 245));
-			btMatricula.setSize(new Dimension(214, 64));
-			btMatricula.setBackground(new Color(0, 51, 153));
+	private JButton getBtFactura() {
+		if (btFactura == null) {
+			btFactura = new JButton();
+			btFactura.setFont(new Font("Arial Black", Font.PLAIN, 14));
+			btFactura.setForeground(Color.white);
+			btFactura.setHorizontalAlignment(SwingConstants.CENTER);
+			btFactura.setHorizontalTextPosition(SwingConstants.CENTER);
+			btFactura.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
+			btFactura.setRolloverEnabled(true);
+			btFactura.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
+			btFactura.setText("Factura");
+			btFactura.setLocation(new Point(20, 245));
+			btFactura.setSize(new Dimension(214, 64));
+			btFactura.setBackground(new Color(0, 51, 153));
 			//quitar borde
-			btMatricula.setBorder(null);
+			btFactura.setBorder(null);
 			//quitar recuadro de boton seleccionado
-			btMatricula.setFocusable(false);
+			btFactura.setFocusable(false);
 			//quitar recuadro al hacer clik
-			btMatricula.setContentAreaFilled(false);
-			btMatricula.addActionListener(new java.awt.event.ActionListener() {
+			btFactura.setContentAreaFilled(false);
+			btFactura.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					panelCentral.removeAll();
 					//panelCentral.add(new panelMatricula(),"Matricula");
@@ -265,7 +265,7 @@ public class frmPrincipal extends JFrame {
 				}
 			});
 		}
-		return btMatricula;
+		return btFactura;
 	}
 
 	/**
@@ -320,7 +320,7 @@ public class frmPrincipal extends JFrame {
 			lbMensaje.setSize(new Dimension(539, 41));
 			lbMensaje.setText("");
 			lbPie = new JLabel();
-			lbPie.setText("2018 Utmach Derechos reservados");
+			lbPie.setText("2020 BlueSoft Derechos reservados");
 			lbPie.setSize(new Dimension(205, 40));
 			lbPie.setLocation(new Point(8, -1));
 			panelPie = new JPanel();
@@ -366,26 +366,26 @@ public class frmPrincipal extends JFrame {
 	}
 
 	/**
-	 * This method initializes btCurso
+	 * This method initializes btVendedor
 	 *
 	 * @return javax.swing.JButton
 	 */
-	private JButton getBtCurso() {
-		if (btCurso == null) {
-			btCurso = new JButton();
-			btCurso.setBounds(new Rectangle(22, 312, 214, 72));
-			btCurso.setFont(new Font("Arial Black", Font.PLAIN, 14));
-			btCurso.setForeground(Color.white);
-			btCurso.setBorder(null);
-			btCurso.setContentAreaFilled(false);
-			btCurso.setHorizontalAlignment(SwingConstants.CENTER);
-			btCurso.setHorizontalTextPosition(SwingConstants.CENTER);
-			btCurso.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
-			btCurso.setRolloverEnabled(true);
-			btCurso.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
-			btCurso.setText("Curso");
-			btCurso.setBackground(new Color(0, 51, 153));
-			btCurso.addActionListener(new java.awt.event.ActionListener() {
+	private JButton getBtVendedor() {
+		if (btVendedor == null) {
+			btVendedor = new JButton();
+			btVendedor.setBounds(new Rectangle(22, 312, 214, 72));
+			btVendedor.setFont(new Font("Arial Black", Font.PLAIN, 14));
+			btVendedor.setForeground(Color.white);
+			btVendedor.setBorder(null);
+			btVendedor.setContentAreaFilled(false);
+			btVendedor.setHorizontalAlignment(SwingConstants.CENTER);
+			btVendedor.setHorizontalTextPosition(SwingConstants.CENTER);
+			btVendedor.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
+			btVendedor.setRolloverEnabled(true);
+			btVendedor.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
+			btVendedor.setText("Vendedor");
+			btVendedor.setBackground(new Color(0, 51, 153));
+			btVendedor.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					panelCentral.removeAll();
 					/*try {
@@ -398,7 +398,7 @@ public class frmPrincipal extends JFrame {
 				}
 			});
 		}
-		return btCurso;
+		return btVendedor;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
