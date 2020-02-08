@@ -62,10 +62,10 @@ public class frmPrincipal extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(749, 578);
+		this.setSize(749, 593);
 		this.setFont(new Font("Dialog", Font.BOLD, 14));
 		this.setPreferredSize(new Dimension(1200, 900));
-		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Recursos/icono app.png")));
+		this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/Recursos/icono app21.png")));
 		this.setResizable(true);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Sistema Tienda Video Juegos");
@@ -355,7 +355,7 @@ public class frmPrincipal extends JFrame {
 			btSalir.setBackground(new Color(0, 51, 153));
 			btSalir.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de salir de la aplicación?","Sistema Académico", JOptionPane.YES_NO_OPTION);
+					int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de salir de la aplicación?","Sistema Tienda Video Juegos", JOptionPane.YES_NO_OPTION);
 				    if (respuesta == JOptionPane.YES_OPTION) {
 				    	System.exit(0);
 				    }
