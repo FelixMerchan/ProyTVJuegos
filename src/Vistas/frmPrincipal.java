@@ -27,7 +27,7 @@ public class frmPrincipal extends JFrame {
 	private JPanel jContentPane = null;
 	private JPanel panelMenu = null;
 	private JPanel panelCentral = null;
-	private JButton btEstudiante = null;
+	private JButton btCliente = null;
 	private JButton btRepresentante = null;
 	private JLabel lbFondo = null;
 	private JLabel lbimg_repre = null;
@@ -124,7 +124,7 @@ public class frmPrincipal extends JFrame {
 
 			panelMenu.add(lbimg_estudiante, null);
 			panelMenu.add(lbimg_repre, null);
-			panelMenu.add(getBtEstudiante(), null);
+			panelMenu.add(getBtCliente(), null);
 			panelMenu.add(getBtRepresentante(), null);
 
 			panelMenu.add(lbimg_matri, null);
@@ -159,32 +159,32 @@ public class frmPrincipal extends JFrame {
 	}
 
 	/**
-	 * This method initializes btEstudiante
+	 * This method initializes btCliente
 	 *
 	 * @return javax.swing.JButton
 	 */
-	private JButton getBtEstudiante() {
-		if (btEstudiante == null) {
-			btEstudiante = new JButton();
-			btEstudiante.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
-			btEstudiante.setBackground(new Color(0, 51, 153));
-			btEstudiante.setSize(new Dimension(214, 64));
-			btEstudiante.setLocation(new Point(21, 108));
-			btEstudiante.setPreferredSize(new Dimension(0, 0));
-			btEstudiante.setForeground(Color.white);
-			btEstudiante.setFont(new Font("Arial Black", Font.PLAIN, 14));
-			btEstudiante.setText("Estudiante");
+	private JButton getBtCliente() {
+		if (btCliente == null) {
+			btCliente = new JButton();
+			btCliente.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
+			btCliente.setBackground(new Color(0, 51, 153));
+			btCliente.setSize(new Dimension(214, 64));
+			btCliente.setLocation(new Point(21, 108));
+			btCliente.setPreferredSize(new Dimension(0, 0));
+			btCliente.setForeground(Color.white);
+			btCliente.setFont(new Font("Arial Black", Font.PLAIN, 14));
+			btCliente.setText("Cliente");
 			//quitar borde
-			btEstudiante.setBorder(null);
+			btCliente.setBorder(null);
 			//quitar recuadro de boton seleccionado
-			btEstudiante.setFocusable(false);
+			btCliente.setFocusable(false);
 			//quitar recuadro al hacer clik
-			btEstudiante.setContentAreaFilled(false);
+			btCliente.setContentAreaFilled(false);
 
-			btEstudiante.setHorizontalTextPosition(SwingConstants.CENTER);
-			btEstudiante.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
+			btCliente.setHorizontalTextPosition(SwingConstants.CENTER);
+			btCliente.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
 
-			btEstudiante.addActionListener(new java.awt.event.ActionListener() {
+			btCliente.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					panelCentral.removeAll();
 					try{
@@ -194,7 +194,7 @@ public class frmPrincipal extends JFrame {
 				}
 			});
 		}
-		return btEstudiante;
+		return btCliente;
 	}
 
 	/**
