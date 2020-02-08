@@ -28,7 +28,7 @@ public class frmPrincipal extends JFrame {
 	private JPanel panelMenu = null;
 	private JPanel panelCentral = null;
 	private JButton btCliente = null;
-	private JButton btRepresentante = null;
+	private JButton btProducto = null;
 	private JLabel lbFondo = null;
 	private JLabel lbimg_repre = null;
 	private JLabel lbimg_estudiante = null;
@@ -125,7 +125,7 @@ public class frmPrincipal extends JFrame {
 			panelMenu.add(lbimg_estudiante, null);
 			panelMenu.add(lbimg_repre, null);
 			panelMenu.add(getBtCliente(), null);
-			panelMenu.add(getBtRepresentante(), null);
+			panelMenu.add(getBtProducto(), null);
 
 			panelMenu.add(lbimg_matri, null);
 			panelMenu.add(getBtMatricula(), null);
@@ -198,29 +198,30 @@ public class frmPrincipal extends JFrame {
 	}
 
 	/**
-	 * This method initializes btRepresentante
+	 * This method initializes btProducto
 	 *
 	 * @return javax.swing.JButton
 	 */
-	private JButton getBtRepresentante() {
-		if (btRepresentante == null) {
-			btRepresentante = new JButton();
-			btRepresentante.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
-			btRepresentante.setText("Representante");
-			btRepresentante.setSize(new Dimension(214, 64));
-			btRepresentante.setLocation(new Point(20, 177));
-			btRepresentante.setForeground(Color.white);
-			btRepresentante.setFont(new Font("Arial Black", Font.PLAIN, 14));
-			btRepresentante.setHorizontalTextPosition(SwingConstants.CENTER);
-			btRepresentante.setHorizontalAlignment(SwingConstants.CENTER);
-			btRepresentante.setRolloverEnabled(true);
-			btRepresentante.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
-			btRepresentante.setBackground(new Color(0, 51, 153));
-			btRepresentante.setBorder(null);
-			btRepresentante.setFocusable(false);
+	private JButton getBtProducto() {
+		if (btProducto == null) {
+			btProducto = new JButton();
+			btProducto.setIcon(new ImageIcon(getClass().getResource("/Recursos/boton-azul.png")));
+			btProducto.setText("Producto");
+			btProducto.setSize(new Dimension(214, 64));
+			btProducto.setLocation(new Point(20, 177));
+			btProducto.setForeground(Color.white);
+			btProducto.setFont(new Font("Arial Black", Font.PLAIN, 14));
+			btProducto.setHorizontalTextPosition(SwingConstants.CENTER);
+			btProducto.setHorizontalAlignment(SwingConstants.CENTER);
+			btProducto.setRolloverEnabled(true);
+			btProducto.setRolloverIcon(new ImageIcon(getClass().getResource("/Recursos/boton-naranja.png")));
+			btProducto.setBackground(new Color(0, 51, 153));
+			btProducto.setBorder(null);
+			btProducto.setActionCommand("Producto");
+			btProducto.setFocusable(false);
 			//quitar recuadro al hacer clik
-			btRepresentante.setContentAreaFilled(false);
-			btRepresentante.addActionListener(new java.awt.event.ActionListener() {
+			btProducto.setContentAreaFilled(false);
+			btProducto.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					panelCentral.removeAll();
 					//panelCentral.add(new panelRepresentante(),"Representante");
@@ -228,7 +229,7 @@ public class frmPrincipal extends JFrame {
 				}
 			});
 		}
-		return btRepresentante;
+		return btProducto;
 	}
 
 	/**
