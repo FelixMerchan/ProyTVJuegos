@@ -7,13 +7,13 @@ package Modelos;
  */
 public class Cliente {
 
-	//cedula, apellido,  nombre, telefono, email, ciudad, direccion, obseracion
+	//cedula, apellido,  nombre, telefono, email, ciudad, direccion, observacion
 	//datos globales
 
-	public int cedula;
+	public String cedula;
 	public String apellido;
 	public String nombre;
-	public int telefono;
+	public String telefono;
 	public String email;
 	public String ciudad;
 	public String direccion;
@@ -23,7 +23,7 @@ public class Cliente {
 	public Cliente() {}
 
 	//constructor comun
-	public Cliente(int cedula, String apellido, String nombre, int telefono,
+	public Cliente(String cedula, String apellido, String nombre, String telefono,
 			        String email, String ciudad, String direccion, String observacion)
 	{
 		this.cedula=cedula;

@@ -23,7 +23,7 @@ public class cCliente {
 	ArrayList<Cliente> Lista = new ArrayList<Cliente>();
 	//encabezados de columnas de la tabla
 
-	//cedula, apellido,  nombre, telefono, email, ciudad, direccion, obseracion
+	//cedula, apellido,  nombre, telefono, email, ciudad, direccion, observacion
 	public String[] columnName = {"No.", "Cedula", "Apellido", "Nombre","Telefono", "Email", "ciudad", "Direccion", "Observacion"};
 
 	/**
@@ -56,7 +56,7 @@ public class cCliente {
 	/**
 	 * Modificar datos de un Cliente existente
 	 */
-	public void modificar(Cliente e, int ced) throws IOException{
+	public void modificar(Cliente e, String ced) throws IOException{
 		int pos=localizar(ced);
 		if(pos>-1){//si Cliente está registrado se modifica
 			Lista.set(pos, e);
@@ -67,9 +67,9 @@ public class cCliente {
 	}
 
 	/**
-	 * Eliminar un Producto
+	 * Eliminar un Cliente
 	 */
-	public void eliminar(int cedula) throws IOException{
+	public void eliminar(String cedula) throws IOException{
 		int pos=localizar(cedula);
 		if(pos>-1){//si Cliente está registrado se elimina
 			Lista.remove(pos);
@@ -90,7 +90,7 @@ public class cCliente {
         for(int i=0; i<Lista.size();i++){
         	Cliente e=(Cliente)Lista.get(i);
         	Object[] row={
-        			//cedula, apellido,  nombre, telefono, email, ciudad, direccion, obseracion
+        			//cedula, apellido,  nombre, telefono, email, ciudad, direccion, observacion
         			new Integer(i+1), e.cedula, e.apellido, e.nombre, e.telefono, e.email,
         			e.ciudad, e.direccion, e.observacion
         			};
@@ -104,11 +104,11 @@ public class cCliente {
 	 * @param cedula
 	 * @return posicion en el arreglo del Cliente encontrado
 	 */
-	public int localizar(int cedula){
+	public int localizar(String cedula){
 		int pos=-1; //se retorna -1 si no se encuentra en el arreglo
 		for(int i=0; i<Lista.size(); i++){
 			Cliente e=(Cliente)Lista.get(i);
-			if(cedula==(e.cedula)){
+			if(cedula.equals(e.cedula)){
 				pos=i; //posicion encontrada
 				break; //finaliza el ciclo for
 			}
@@ -122,10 +122,10 @@ public class cCliente {
 	 * @return cCliente
 	 * @throws IOException
 	 */
-	public cCliente buscar_cedula(int cedula ) throws IOException{
+	public cCliente buscar_cedula(String cedula ) throws IOException{
 		cCliente ob=new cCliente();
 		for(int i=0; i<Lista.size(); i++){
-			int cad=0;
+			String cad="";
 			Cliente e=(Cliente)Lista.get(i);
 			if(e.cedula.length() >= cedula.length()){
 				cad=e.cedula.substring(0, cedula.length());
@@ -215,11 +215,11 @@ public class cCliente {
 	           String [] row = line.split(SEPARADOR);
 	           removeTrailingQuotes(row);
 	           Cliente ob=new Cliente();
-	         //cedula, apellido,  nombre, telefono, email, ciudad, direccion, obseracion
-	           ob.cedula=Integer.parseInt(row[0]);
+	         //cedula, apellido,  nombre, telefono, email, ciudad, direccion, observacion
+	           ob.cedula=row[0];
 	           ob.apellido=row[1];
 	           ob.nombre=row[2];
-	           ob.telefono=Integer.parseInt(row[3]);
+	           ob.telefono=row[3];
 	           ob.email=row[4];
 	           ob.ciudad=row[5];
 	           ob.direccion=row[6];
@@ -269,7 +269,7 @@ public class cCliente {
 			file.append("Observación").append(NEXT_LINE);  //Next_Line uno solo al final
 
 
-			//cedula, apellido,  nombre, telefono, email, ciudad, direccion, obseracion
+			//cedula, apellido,  nombre, telefono, email, ciudad, direccion, observacion
 	    	for(int i=0; i<Lista.size();i++){
 	        	Cliente ob=(Cliente)Lista.get(i);
 				file.append(ob.cedula + "").append(SEPARADOR);
