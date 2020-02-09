@@ -362,32 +362,38 @@ public class panelCliente extends JPanel {
 	 *
 	 * @return javax.swing.JPanel
 	 */
+
+	//cedula, apellido,  nombre, telefono, email, ciudad, direccion, observacion
 	private JPanel getPaneldatos() {
 		if (paneldatos == null) {
-			lbmadre = new JLabel();
-			lbmadre.setBounds(new Rectangle(16, 207, 84, 20));
-			lbmadre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbmadre.setText("Madre:");
-			lbpadre = new JLabel();
-			lbpadre.setBounds(new Rectangle(16, 174, 84, 25));
-			lbpadre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbpadre.setText("Padre:");
+			lbtelefono = new JLabel();
+			lbtelefono.setBounds(new Rectangle(16, 207, 84, 20));
+			lbtelefono.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbtelefono.setText("Teléfono:");
+			lbemail = new JLabel();
+			lbemail.setBounds(new Rectangle(16, 174, 84, 25));
+			lbemail.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbemail.setText("Email:");
 			lbdireccion = new JLabel();
 			lbdireccion.setBounds(new Rectangle(16, 142, 84, 25));
 			lbdireccion.setFont(new Font("Dialog", Font.PLAIN, 12));
 			lbdireccion.setText("Direccción:");
-			Genero = new JLabel();
-			Genero.setBounds(new Rectangle(17, 113, 81, 25));
-			Genero.setFont(new Font("Dialog", Font.PLAIN, 12));
-			Genero.setText("Género:");
-			lbbombre = new JLabel();
-			lbbombre.setBounds(new Rectangle(18, 84, 82, 24));
-			lbbombre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbbombre.setText("Nombre:");
+			lbciudad = new JLabel();
+			lbciudad.setBounds(new Rectangle(17, 113, 81, 25));
+			lbciudad.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbciudad.setText("Ciudad:");
+			lbnombre = new JLabel();
+			lbnombre.setBounds(new Rectangle(18, 84, 82, 24));
+			lbnombre.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbnombre.setText("Nombres:");
 			lbapellido = new JLabel();
 			lbapellido.setBounds(new Rectangle(19, 54, 82, 23));
 			lbapellido.setFont(new Font("Dialog", Font.PLAIN, 12));
 			lbapellido.setText("Apellidos:");
+			lbobservacion = new JLabel();
+			lbobservacion.setBounds(new Rectangle(20, 60, 82, 23));
+			lbobservacion.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbobservacion.setText("Observación:");
 			lbcedula = new JLabel();
 			lbcedula.setText("Cédula:");
 			lbcedula.setLocation(new Point(20, 27));
@@ -396,29 +402,24 @@ public class panelCliente extends JPanel {
 			paneldatos = new JPanel();
 			paneldatos.setLayout(null);
 			paneldatos.setBounds(new Rectangle(15, 53, 546, 242));
-			paneldatos.setBorder(BorderFactory.createTitledBorder(null, "Datos de estudiantes", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			paneldatos.setBorder(BorderFactory.createTitledBorder(null, "Datos de cliente", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			paneldatos.add(lbcedula, null);
 			paneldatos.add(lbapellido, null);
-			paneldatos.add(lbbombre, null);
+			paneldatos.add(lbnombre, null);
+			paneldatos.add(lbtelefono, null);
+			paneldatos.add(lbemail, null);
+			paneldatos.add(lbciudad, null);
 			paneldatos.add(getTxtCedula(), null);
-			paneldatos.add(getTxtApellidos(), null);
-			paneldatos.add(getTxtNombres(), null);
-			paneldatos.add(Genero, null);
+			paneldatos.add(getTxtApellido(), null);
+			paneldatos.add(getTxtNombre(), null);
 			paneldatos.add(getTxtDireccion(), null);
-
+			paneldatos.add(getTxtEmail(), null);
+			paneldatos.add(getTxtCiudad(), null);
 			paneldatos.add(lbdireccion, null);
-			paneldatos.add(lbpadre, null);
+			paneldatos.add(lbobservacion, null);
 
-			paneldatos.add(getRbMasculino(), null);
-			paneldatos.add(getRbFemenino(), null);
-			ButtonGroup grupoGenero = new ButtonGroup();
-			grupoGenero.add(rbMasculino);
-			grupoGenero.add(rbFemenino);
-
-
-			paneldatos.add(getTxtPadre(), null);
-			paneldatos.add(lbmadre, null);
-			paneldatos.add(getTxtMadre(), null);
+			paneldatos.add(getTxtTelefono(), null);
+			paneldatos.add(getTxtObservacion(), null);
 			paneldatos.add(getBtBuscar(), null);
 		}
 		return paneldatos;
@@ -450,7 +451,7 @@ public class panelCliente extends JPanel {
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtApellidos() {
+	private JTextField getTxtApellido() {
 		if (txtApellidos == null) {
 			txtApellidos = new JTextField();
 			txtApellidos.setSize(new Dimension(330, 25));
@@ -469,7 +470,7 @@ public class panelCliente extends JPanel {
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtNombres() {
+	private JTextField getTxtNombre() {
 		if (txtNombres == null) {
 			txtNombres = new JTextField();
 			txtNombres.setLocation(new Point(179, 87));
@@ -482,6 +483,45 @@ public class panelCliente extends JPanel {
 		}
 		return txtNombres;
 	}
+
+	/**
+	 * This method initializes txtEmail
+	 *
+	 * @return javax.swing.JTextField
+	 */
+	private JTextField getTxtEmail() {
+		if (txtEmail == null) {
+			txtEmail = new JTextField();
+			txtEmail.setLocation(new Point(179, 60));
+			txtEmail.setSize(new Dimension(330, 25));
+			txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyReleased(java.awt.event.KeyEvent e) {
+					if(Validaciones.esLetras(txtEmail)) Validaciones.pinta_text(txtEmail);
+				}
+			});
+		}
+		return txtEmail;
+	}
+
+	/**
+	 * This method initializes txtCiudad
+	 *
+	 * @return javax.swing.JTextField
+	 */
+	private JTextField getTxtCiudad() {
+		if (txtCiudad == null) {
+			txtCiudad = new JTextField();
+			txtCiudad.setLocation(new Point(179, 70));
+			txtCiudad.setSize(new Dimension(330, 25));
+			txtCiudad.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyReleased(java.awt.event.KeyEvent e) {
+					if(Validaciones.esLetras(txtEmail)) Validaciones.pinta_text(txtEmail);
+				}
+			});
+		}
+		return txtEmail;
+	}
+
 
 	/**
 	 * This method initializes txtDireccion
@@ -502,61 +542,34 @@ public class panelCliente extends JPanel {
 		return txtDireccion;
 	}
 
-	/**
-	 * This method initializes rbMasculino
-	 *
-	 * @return javax.swing.JRadioButton
-	 */
-	private JRadioButton getRbMasculino() {
-		if (rbMasculino == null) {
-			rbMasculino = new JRadioButton();
-			rbMasculino.setBounds(new Rectangle(283, 117, 91, 20));
-			rbMasculino.setText("Masculino");
-		}
-		return rbMasculino;
-	}
+
 
 	/**
-	 * This method initializes rbFemenino
-	 *
-	 * @return javax.swing.JRadioButton
-	 */
-	private JRadioButton getRbFemenino() {
-		if (rbFemenino == null) {
-			rbFemenino = new JRadioButton();
-			rbFemenino.setText("Femenino");
-			rbFemenino.setSelected(true);
-			rbFemenino.setBounds(new Rectangle(180, 117, 80, 24));
-		}
-		return rbFemenino;
-	}
-
-	/**
-	 * This method initializes txtPadre
+	 * This method initializes txtTelefono
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtPadre() {
-		if (txtPadre == null) {
-			txtPadre = new JTextField();
-			txtPadre.setLocation(new Point(179, 174));
-			txtPadre.setSize(new Dimension(330, 25));
+	private JTextField getTxtTelefono() {
+		if (txtTelefono == null) {
+			txtTelefono = new JTextField();
+			txtTelefono.setLocation(new Point(179, 174));
+			txtTelefono.setSize(new Dimension(330, 25));
 		}
-		return txtPadre;
+		return txtTelefono;
 	}
 
 	/**
-	 * This method initializes txtMadre
+	 * This method initializes txtObservacion
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtMadre() {
-		if (txtMadre == null) {
-			txtMadre = new JTextField();
-			txtMadre.setLocation(new Point(179, 203));
-			txtMadre.setSize(new Dimension(330, 25));
+	private JTextField getTxtObservacion() {
+		if (txtObservacion == null) {
+			txtObservacion = new JTextField();
+			txtObservacion.setLocation(new Point(179, 203));
+			txtObservacion.setSize(new Dimension(330, 25));
 		}
-		return txtMadre;
+		return txtObservacion;
 	}
 
 	/**
@@ -747,7 +760,7 @@ public class panelCliente extends JPanel {
 			btEliminar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					if(!txtCedula.getText().trim().equals("")){
-					    int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminiar este registro?","Sistema Académico", JOptionPane.YES_NO_OPTION);
+					    int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminiar este registro?","Tienda de videojuegos", JOptionPane.YES_NO_OPTION);
 					    if (respuesta == JOptionPane.YES_OPTION) {
 					    	eliminar();
 					    }
