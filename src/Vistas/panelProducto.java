@@ -32,7 +32,7 @@ import javax.swing.JTable;
 
 public class panelProducto extends JPanel {
 	//datos globales
-	public cProducto list=new cProducto();  //  @jve:decl-index=0:
+	public cEstudiante list=new cEstudiante();  //  @jve:decl-index=0:
 	String ced=""; //para editar  //  @jve:decl-index=0:
 
 	private static final long serialVersionUID = 1L;
@@ -74,11 +74,11 @@ public class panelProducto extends JPanel {
 	/*
 	 * Leer datos del formulario y guardar en un objeto
 	 */
-    public Producto leer()
+    public Estudiante leer()
     {
-    	Producto ob=null;
+    	Estudiante ob=null;
         if(form_validado()){
-            ob=new Producto();
+            ob=new Estudiante();
             ob.Cedula=txtCedula.getText();
             ob.Apellido=txtApellidos.getText();
             ob.Nombre=txtNombres.getText();
@@ -160,7 +160,7 @@ public class panelProducto extends JPanel {
     {
         if(pos>=0 && pos<list.Count())
         {
-            Producto ob=list.getProducto(pos);
+            Estudiante ob=list.getEstudiante(pos);
             txtCedula.setText(ob.Cedula);
             txtApellidos.setText(ob.Apellido);
             txtNombres.setText(ob.Nombre);
@@ -190,16 +190,16 @@ public class panelProducto extends JPanel {
     }
 
     /*
-     * Guardar Producto, cuando es nuevo o se modifica un existente
+     * Guardar estudiante, cuando es nuevo o se modifica un existente
      */
     public void guardar(){
-    	Producto ob=leer();
+    	Estudiante ob=leer();
 		try{
 			if(ob!=null){
-				if (ced.equals("")){//guardar un nuevo Producto
+				if (ced.equals("")){//guardar un nuevo estudiante
 					list.nuevo(ob);
 				}
-				else{//guardar datos de Producto editado
+				else{//guardar datos de estudiante editado
 					list.modificar(ob,ced);
 				}
 				frmPrincipal.lbMensaje.setText("Registro guardado exitosamente");
@@ -222,14 +222,14 @@ public class panelProducto extends JPanel {
     public void buscar_varios()
     {
         try{
-            cProducto p=list.buscar_cedula(txtDato.getText()); //busca por cedula
+            cEstudiante p=list.buscar_cedula(txtDato.getText()); //busca por cedula
             if(p.Count()==0)p=list.buscar_apellido(txtDato.getText()); //buscar por apellido
             tabla.setModel(p.getTabla());
         }catch(Exception ex){frmPrincipal.lbMensaje.setText(ex.getMessage());}
     }
 
     /*
-     * Eliminar datos de un Producto
+     * Eliminar datos de un estudiante
      */
     public void eliminar(){
     	try{
@@ -304,7 +304,7 @@ public class panelProducto extends JPanel {
 		lbTitulo.setForeground(Color.blue);
 		lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbTitulo.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbTitulo.setText("Gestión de Productos");
+		lbTitulo.setText("Gestión de Estudiantes");
 		lbTitulo.setBackground(Color.white);
 		this.setSize(785, 661);
 		this.setLayout(null);
@@ -378,7 +378,7 @@ public class panelProducto extends JPanel {
 			paneldatos = new JPanel();
 			paneldatos.setLayout(null);
 			paneldatos.setBounds(new Rectangle(15, 53, 546, 242));
-			paneldatos.setBorder(BorderFactory.createTitledBorder(null, "Datos de Productos", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			paneldatos.setBorder(BorderFactory.createTitledBorder(null, "Datos de estudiantes", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			paneldatos.add(lbcedula, null);
 			paneldatos.add(lbapellido, null);
 			paneldatos.add(lbbombre, null);

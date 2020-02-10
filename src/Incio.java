@@ -6,6 +6,7 @@
  */
 import java.io.IOException;
 import Vistas.frmPrincipal;
+import Vistas.panelProducto;
 
 public class Incio {
 	/**
