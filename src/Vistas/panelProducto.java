@@ -32,27 +32,24 @@ import javax.swing.JTable;
 
 public class panelProducto extends JPanel {
 	//datos globales
-	public cEstudiante list=new cEstudiante();  //  @jve:decl-index=0:
+	public cProducto list=new cProducto();  //  @jve:decl-index=0:
 	String ced=""; //para editar  //  @jve:decl-index=0:
 
 	private static final long serialVersionUID = 1L;
 	private JButton btGuardar = null;
 	private JPanel paneldatos = null;
-	private JLabel lbcedula = null;
-	private JLabel lbapellido = null;
-	private JLabel lbbombre = null;
-	private JTextField txtCedula = null;
-	private JTextField txtApellidos = null;
-	private JTextField txtNombres = null;
-	private JLabel Genero = null;
-	private JTextField txtDireccion = null;
-	private JRadioButton rbMasculino = null;
-	private JRadioButton rbFemenino = null;
-	private JLabel lbdireccion = null;
-	private JLabel lbpadre = null;
-	private JTextField txtPadre = null;
-	private JLabel lbmadre = null;
-	private JTextField txtMadre = null;
+	private JLabel lbCodigo = null;
+	private JLabel lbNombre = null;
+	private JLabel lbDescripcion = null;
+	private JTextField txtCodigo = null;
+	private JTextField txtNombre = null;
+	private JTextField txtDescripcion = null;
+	private JLabel lbMarca = null;
+	private JTextField txtMarca = null;
+	private JLabel lbCategoria = null;
+	private JLabel lbCantidad = null;
+	private JTextField txtCategoria = null;
+	private JTextField txtCantidad = null;
 
 
 	private JButton btNuevo = null;
@@ -68,24 +65,27 @@ public class panelProducto extends JPanel {
 	private JButton btEliminar = null;
 	private JButton btEditar = null;
 	private JButton btCancelar = null;
+	private JLabel lbPrecio = null;
+	private JTextField txtPrecio = null;
+	private JLabel lbIva = null;
+	private JTextField txtIva = null;
 
 
 	/**********************METODOS PERSONALIZADOS ********************/
 	/*
 	 * Leer datos del formulario y guardar en un objeto
 	 */
-    public Estudiante leer()
+    public Producto leer()
     {
-    	Estudiante ob=null;
+    	Producto ob=null;
         if(form_validado()){
-            ob=new Estudiante();
-            ob.Cedula=txtCedula.getText();
-            ob.Apellido=txtApellidos.getText();
-            ob.Nombre=txtNombres.getText();
-            ob.Direccion=txtDireccion.getText();
-            ob.Genero=rbMasculino.isSelected()?"Masculino":"Femenino";
-            ob.Madre=txtMadre.getText();
-            ob.Padre=txtPadre.getText();
+            ob=new Producto();
+            ob.codigo=txtCodigo.getText();
+            ob.nombre=txtNombre.getText();
+            ob.descripcion=txtDescripcion.getText();
+            ob.marca=txtMarca.getText();
+            ob.cantidad=txtCantidad.getText();
+            ob.categoria=txtCategoria.getText();
             System.out.print(ob.toString());
         }
         return ob;
@@ -98,22 +98,22 @@ public class panelProducto extends JPanel {
         boolean ok=true;
         String men="Campos con errores";
         //validar requerido
-        if(!Validaciones.esCedula(txtCedula)){
+        if(!Validaciones.esCedula(txtCodigo)){
             ok=false;
             men += ", Cedula";
         }
 
-        if(!Validaciones.esLetras(txtNombres)){
+        if(!Validaciones.esLetras(txtDescripcion)){
             ok=false;
             men += ", Nombre";
         }
 
-        if(!Validaciones.esLetras(txtApellidos)){
+        if(!Validaciones.esLetras(txtNombre)){
             ok=false;
             men += ", Apellido";
         }
 
-        if(!Validaciones.esRequerido(txtDireccion)){
+        if(!Validaciones.esRequerido(txtMarca)){
             ok=false;
             men += ", Dirección";
         }
@@ -129,13 +129,13 @@ public class panelProducto extends JPanel {
      */
     public void limpiar_textos()
     {
-        txtCedula.setText("");
-        txtApellidos.setText("");
-        txtNombres.setText("");
-        txtDireccion.setText("");
-        txtMadre.setText("");
-        txtPadre.setText("");
-        txtCedula.requestFocus();  //envia curso o enfoque a la caja de texto cedula
+        txtCodigo.setText("");
+        txtNombre.setText("");
+        txtDescripcion.setText("");
+        txtMarca.setText("");
+        txtCantidad.setText("");
+        txtCategoria.setText("");
+        txtCodigo.requestFocus();  //envia curso o enfoque a la caja de texto cedula
         frmPrincipal.lbMensaje.setText("");
     }
 
@@ -144,12 +144,12 @@ public class panelProducto extends JPanel {
      */
 
     public void quitar_validaciones(){
-    	Validaciones.pinta_text(txtCedula);
-    	Validaciones.pinta_text(txtApellidos);
-    	Validaciones.pinta_text(txtNombres);
-    	Validaciones.pinta_text(txtDireccion);
-    	Validaciones.pinta_text(txtMadre);
-    	Validaciones.pinta_text(txtPadre);
+    	Validaciones.pinta_text(txtCodigo);
+    	Validaciones.pinta_text(txtNombre);
+    	Validaciones.pinta_text(txtDescripcion);
+    	Validaciones.pinta_text(txtMarca);
+    	Validaciones.pinta_text(txtCantidad);
+    	Validaciones.pinta_text(txtCategoria);
     	frmPrincipal.lbMensaje.setText("");
     }
 
@@ -160,16 +160,14 @@ public class panelProducto extends JPanel {
     {
         if(pos>=0 && pos<list.Count())
         {
-            Estudiante ob=list.getEstudiante(pos);
-            txtCedula.setText(ob.Cedula);
-            txtApellidos.setText(ob.Apellido);
-            txtNombres.setText(ob.Nombre);
-            txtDireccion.setText(ob.Direccion);
-            txtMadre.setText(ob.Madre);
-            txtPadre.setText(ob.Padre);
-            if(ob.Genero.equals("Femenino"))
-            	rbFemenino.setSelected(true);
-            else rbMasculino.setSelected(true);
+            Producto ob=list.getProducto(pos);
+            txtCodigo.setText(ob.codigo);
+            txtNombre.setText(ob.nombre);
+            txtDescripcion.setText(ob.descripcion);
+            txtMarca.setText(ob.marca);
+            txtCantidad.setText(ob.cantidad);
+            txtCategoria.setText(ob.categoria);
+
         }
     }
 
@@ -178,7 +176,7 @@ public class panelProducto extends JPanel {
      */
     public void buscar(){
     	try{
-            int pos=list.localizar(txtCedula.getText());
+            int pos=list.localizar(txtCodigo.getText());
             if (pos>-1)
             {
                 ver_registro(pos);
@@ -190,16 +188,16 @@ public class panelProducto extends JPanel {
     }
 
     /*
-     * Guardar estudiante, cuando es nuevo o se modifica un existente
+     * Guardar Producto, cuando es nuevo o se modifica un existente
      */
     public void guardar(){
-    	Estudiante ob=leer();
+    	Producto ob=leer();
 		try{
 			if(ob!=null){
-				if (ced.equals("")){//guardar un nuevo estudiante
+				if (ced.equals("")){//guardar un nuevo Producto
 					list.nuevo(ob);
 				}
-				else{//guardar datos de estudiante editado
+				else{//guardar datos de Producto editado
 					list.modificar(ob,ced);
 				}
 				frmPrincipal.lbMensaje.setText("Registro guardado exitosamente");
@@ -217,23 +215,23 @@ public class panelProducto extends JPanel {
     }
 
     /*
-     * Buscar datos por criterios cedula y apellido
+     * Buscar datos por criterios codigo y nombre
      */
     public void buscar_varios()
     {
         try{
-            cEstudiante p=list.buscar_cedula(txtDato.getText()); //busca por cedula
-            if(p.Count()==0)p=list.buscar_apellido(txtDato.getText()); //buscar por apellido
+            cProducto p=list.buscar_codigo(txtDato.getText()); //busca por codigo
+            if(p.Count()==0)p=list.buscar_nombre(txtDato.getText()); //buscar por nombre
             tabla.setModel(p.getTabla());
         }catch(Exception ex){frmPrincipal.lbMensaje.setText(ex.getMessage());}
     }
 
     /*
-     * Eliminar datos de un estudiante
+     * Eliminar datos de un Producto
      */
     public void eliminar(){
     	try{
-			list.eliminar(txtCedula.getText());
+			list.eliminar(txtCodigo.getText());
 			list.guardar();
 			tabla.setModel(list.getTabla());
 			frmPrincipal.lbMensaje.setText("Registro eliminado");
@@ -246,12 +244,12 @@ public class panelProducto extends JPanel {
      */
     public void habilitar_textos(Boolean ok)
     {
-    	txtCedula.setEditable(ok);
-        txtApellidos.setEditable(ok);
-        txtNombres.setEditable(ok);
-        txtDireccion.setEditable(ok);
-        txtMadre.setEditable(ok);
-        txtPadre.setEditable(ok);
+    	txtCodigo.setEditable(ok);
+        txtNombre.setEditable(ok);
+        txtDescripcion.setEditable(ok);
+        txtMarca.setEditable(ok);
+        txtCantidad.setEditable(ok);
+        txtCategoria.setEditable(ok);
     }
 
     /*
@@ -304,7 +302,7 @@ public class panelProducto extends JPanel {
 		lbTitulo.setForeground(Color.blue);
 		lbTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbTitulo.setHorizontalTextPosition(SwingConstants.CENTER);
-		lbTitulo.setText("Gestión de Estudiantes");
+		lbTitulo.setText("Gestión de Productos");
 		lbTitulo.setBackground(Color.white);
 		this.setSize(785, 661);
 		this.setLayout(null);
@@ -346,199 +344,171 @@ public class panelProducto extends JPanel {
 	 */
 	private JPanel getPaneldatos() {
 		if (paneldatos == null) {
-			lbmadre = new JLabel();
-			lbmadre.setBounds(new Rectangle(16, 207, 84, 20));
-			lbmadre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbmadre.setText("Madre:");
-			lbpadre = new JLabel();
-			lbpadre.setBounds(new Rectangle(16, 174, 84, 25));
-			lbpadre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbpadre.setText("Padre:");
-			lbdireccion = new JLabel();
-			lbdireccion.setBounds(new Rectangle(16, 142, 84, 25));
-			lbdireccion.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbdireccion.setText("Direccción:");
-			Genero = new JLabel();
-			Genero.setBounds(new Rectangle(17, 113, 81, 25));
-			Genero.setFont(new Font("Dialog", Font.PLAIN, 12));
-			Genero.setText("Género:");
-			lbbombre = new JLabel();
-			lbbombre.setBounds(new Rectangle(18, 84, 82, 24));
-			lbbombre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbbombre.setText("Nombre:");
-			lbapellido = new JLabel();
-			lbapellido.setBounds(new Rectangle(19, 54, 82, 23));
-			lbapellido.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbapellido.setText("Apellidos:");
-			lbcedula = new JLabel();
-			lbcedula.setText("Cédula:");
-			lbcedula.setLocation(new Point(20, 27));
-			lbcedula.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbcedula.setSize(new Dimension(80, 20));
+			lbIva = new JLabel();
+			lbIva.setBounds(new Rectangle(329, 114, 58, 24));
+			lbIva.setText("Iva:");
+			lbPrecio = new JLabel();
+			lbPrecio.setBounds(new Rectangle(287, 173, 118, 26));
+			lbPrecio.setText("Precio de Venta:");
+			lbCantidad = new JLabel();
+			lbCantidad.setBounds(new Rectangle(16, 174, 109, 25));
+			lbCantidad.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbCantidad.setText("Cantidad en Stock");
+			lbCategoria = new JLabel();
+			lbCategoria.setBounds(new Rectangle(16, 142, 84, 25));
+			lbCategoria.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbCategoria.setText("Categoria");
+			lbMarca = new JLabel();
+			lbMarca.setBounds(new Rectangle(17, 113, 81, 25));
+			lbMarca.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbMarca.setText("Marca:");
+			lbDescripcion = new JLabel();
+			lbDescripcion.setBounds(new Rectangle(18, 84, 82, 24));
+			lbDescripcion.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbDescripcion.setText("Descripcion:");
+			lbNombre = new JLabel();
+			lbNombre.setBounds(new Rectangle(19, 54, 82, 23));
+			lbNombre.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbNombre.setText("Nombre:");
+			lbCodigo = new JLabel();
+			lbCodigo.setText("Código:");
+			lbCodigo.setLocation(new Point(20, 27));
+			lbCodigo.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbCodigo.setSize(new Dimension(80, 20));
 			paneldatos = new JPanel();
 			paneldatos.setLayout(null);
-			paneldatos.setBounds(new Rectangle(15, 53, 546, 242));
-			paneldatos.setBorder(BorderFactory.createTitledBorder(null, "Datos de estudiantes", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
-			paneldatos.add(lbcedula, null);
-			paneldatos.add(lbapellido, null);
-			paneldatos.add(lbbombre, null);
-			paneldatos.add(getTxtCedula(), null);
-			paneldatos.add(getTxtApellidos(), null);
-			paneldatos.add(getTxtNombres(), null);
-			paneldatos.add(Genero, null);
-			paneldatos.add(getTxtDireccion(), null);
+			paneldatos.setBounds(new Rectangle(19, 62, 546, 219));
+			paneldatos.setBorder(BorderFactory.createTitledBorder(null, "Datos de Productos", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
+			paneldatos.add(lbCodigo, null);
+			paneldatos.add(lbNombre, null);
+			paneldatos.add(lbDescripcion, null);
+			paneldatos.add(getTxtCodigo(), null);
+			paneldatos.add(getTxtNombre(), null);
+			paneldatos.add(getTxtDescripcion(), null);
+			paneldatos.add(lbMarca, null);
+			paneldatos.add(getTxtMarca(), null);
 
-			paneldatos.add(lbdireccion, null);
-			paneldatos.add(lbpadre, null);
-
-			paneldatos.add(getRbMasculino(), null);
-			paneldatos.add(getRbFemenino(), null);
-			ButtonGroup grupoGenero = new ButtonGroup();
-			grupoGenero.add(rbMasculino);
-			grupoGenero.add(rbFemenino);
+			paneldatos.add(lbCategoria, null);
+			paneldatos.add(lbCantidad, null);
 
 
-			paneldatos.add(getTxtPadre(), null);
-			paneldatos.add(lbmadre, null);
-			paneldatos.add(getTxtMadre(), null);
+
+
+			paneldatos.add(getTxtCategoria(), null);
+			paneldatos.add(getTxtCantidad(), null);
 			paneldatos.add(getBtBuscar(), null);
+			paneldatos.add(lbPrecio, null);
+			paneldatos.add(getTxtPrecio(), null);
+			paneldatos.add(lbIva, null);
+			paneldatos.add(getTxtIva(), null);
 		}
 		return paneldatos;
 	}
 
 	/**
-	 * This method initializes txtCedula
+	 * This method initializes txtCodigo
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtCedula() {
-		if (txtCedula == null) {
-			txtCedula = new JTextField();
-			txtCedula.setLocation(new Point(179, 24));
-			txtCedula.setPreferredSize(new Dimension(5, 25));
-			txtCedula.setFont(new Font("Dialog", Font.PLAIN, 12));
-			txtCedula.setSize(new Dimension(176, 25));
-			txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+	private JTextField getTxtCodigo() {
+		if (txtCodigo == null) {
+			txtCodigo = new JTextField();
+			txtCodigo.setLocation(new Point(179, 25));
+			txtCodigo.setPreferredSize(new Dimension(5, 25));
+			txtCodigo.setFont(new Font("Dialog", Font.PLAIN, 12));
+			txtCodigo.setSize(new Dimension(176, 25));
+			txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
 				public void keyReleased(java.awt.event.KeyEvent e) {
-					if(Validaciones.esCedula(txtCedula)) Validaciones.pinta_text(txtCedula);
+					if(Validaciones.esCedula(txtCodigo)) Validaciones.pinta_text(txtCodigo);
 				}
 			});
 		}
-		return txtCedula;
+		return txtCodigo;
 	}
 
 	/**
-	 * This method initializes txtApellidos
+	 * This method initializes txtNombre
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtApellidos() {
-		if (txtApellidos == null) {
-			txtApellidos = new JTextField();
-			txtApellidos.setSize(new Dimension(330, 25));
-			txtApellidos.setLocation(new Point(179, 58));
-			txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+	private JTextField getTxtNombre() {
+		if (txtNombre == null) {
+			txtNombre = new JTextField();
+			txtNombre.setSize(new Dimension(330, 25));
+			txtNombre.setLocation(new Point(179, 54));
+			txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
 				public void keyReleased(java.awt.event.KeyEvent e) {
-					if(Validaciones.esLetras(txtApellidos)) Validaciones.pinta_text(txtApellidos);
+					if(Validaciones.esLetras(txtNombre)) Validaciones.pinta_text(txtNombre);
 				}
 			});
 		}
-		return txtApellidos;
+		return txtNombre;
 	}
 
 	/**
-	 * This method initializes txtNombres
+	 * This method initializes txtDescripcion
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtNombres() {
-		if (txtNombres == null) {
-			txtNombres = new JTextField();
-			txtNombres.setLocation(new Point(179, 87));
-			txtNombres.setSize(new Dimension(330, 25));
-			txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+	private JTextField getTxtDescripcion() {
+		if (txtDescripcion == null) {
+			txtDescripcion = new JTextField();
+			txtDescripcion.setLocation(new Point(179, 82));
+			txtDescripcion.setSize(new Dimension(330, 25));
+			txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
 				public void keyReleased(java.awt.event.KeyEvent e) {
-					if(Validaciones.esLetras(txtNombres)) Validaciones.pinta_text(txtNombres);
+					if(Validaciones.esLetras(txtDescripcion)) Validaciones.pinta_text(txtDescripcion);
 				}
 			});
 		}
-		return txtNombres;
+		return txtDescripcion;
 	}
 
 	/**
-	 * This method initializes txtDireccion
+	 * This method initializes txtMarca
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtDireccion() {
-		if (txtDireccion == null) {
-			txtDireccion = new JTextField();
-			txtDireccion.setLocation(new Point(179, 143));
-			txtDireccion.setSize(new Dimension(330, 25));
-			txtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+	private JTextField getTxtMarca() {
+		if (txtMarca == null) {
+			txtMarca = new JTextField();
+			txtMarca.setLocation(new Point(179, 114));
+			txtMarca.setSize(new Dimension(137, 25));
+			txtMarca.addKeyListener(new java.awt.event.KeyAdapter() {
 				public void keyReleased(java.awt.event.KeyEvent e) {
-					if(Validaciones.esRequerido(txtDireccion)) Validaciones.pinta_text(txtDireccion);
+					if(Validaciones.esRequerido(txtMarca)) Validaciones.pinta_text(txtMarca);
 				}
 			});
 		}
-		return txtDireccion;
+		return txtMarca;
 	}
 
 	/**
-	 * This method initializes rbMasculino
-	 *
-	 * @return javax.swing.JRadioButton
-	 */
-	private JRadioButton getRbMasculino() {
-		if (rbMasculino == null) {
-			rbMasculino = new JRadioButton();
-			rbMasculino.setBounds(new Rectangle(283, 117, 91, 20));
-			rbMasculino.setText("Masculino");
-		}
-		return rbMasculino;
-	}
-
-	/**
-	 * This method initializes rbFemenino
-	 *
-	 * @return javax.swing.JRadioButton
-	 */
-	private JRadioButton getRbFemenino() {
-		if (rbFemenino == null) {
-			rbFemenino = new JRadioButton();
-			rbFemenino.setText("Femenino");
-			rbFemenino.setSelected(true);
-			rbFemenino.setBounds(new Rectangle(180, 117, 80, 24));
-		}
-		return rbFemenino;
-	}
-
-	/**
-	 * This method initializes txtPadre
+	 * This method initializes txtCategoria
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtPadre() {
-		if (txtPadre == null) {
-			txtPadre = new JTextField();
-			txtPadre.setLocation(new Point(179, 174));
-			txtPadre.setSize(new Dimension(330, 25));
+	private JTextField getTxtCategoria() {
+		if (txtCategoria == null) {
+			txtCategoria = new JTextField();
+			txtCategoria.setLocation(new Point(179, 142));
+			txtCategoria.setSize(new Dimension(133, 25));
 		}
-		return txtPadre;
+		return txtCategoria;
 	}
 
 	/**
-	 * This method initializes txtMadre
+	 * This method initializes txtCantidad
 	 *
 	 * @return javax.swing.JTextField
 	 */
-	private JTextField getTxtMadre() {
-		if (txtMadre == null) {
-			txtMadre = new JTextField();
-			txtMadre.setLocation(new Point(179, 203));
-			txtMadre.setSize(new Dimension(330, 25));
+	private JTextField getTxtCantidad() {
+		if (txtCantidad == null) {
+			txtCantidad = new JTextField();
+			txtCantidad.setLocation(new Point(179, 172));
+			txtCantidad.setSize(new Dimension(97, 25));
 		}
-		return txtMadre;
+		return txtCantidad;
 	}
 
 	/**
@@ -599,7 +569,7 @@ public class panelProducto extends JPanel {
 	private JScrollPane getScrollPane() {
 		if (ScrollPane == null) {
 			ScrollPane = new JScrollPane();
-			ScrollPane.setBounds(new Rectangle(15, 355, 751, 293));
+			ScrollPane.setBounds(new Rectangle(15, 403, 751, 245));
 			ScrollPane.setViewportView(getTabla());
 		}
 		return ScrollPane;
@@ -646,7 +616,7 @@ public class panelProducto extends JPanel {
 			panelBuscar.setBorder(BorderFactory.createTitledBorder(null, "", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			panelBuscar.setBackground(SystemColor.control);
 			panelBuscar.setSize(new Dimension(546, 47));
-			panelBuscar.setLocation(new Point(15, 303));
+			panelBuscar.setLocation(new Point(19, 304));
 			panelBuscar.add(lbBuscar, null);
 			panelBuscar.add(getTxtDato(), null);
 		}
@@ -728,7 +698,7 @@ public class panelProducto extends JPanel {
 			btEliminar.setIcon(new ImageIcon(getClass().getResource("/Recursos/eliminar.png")));
 			btEliminar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					if(!txtCedula.getText().trim().equals("")){
+					if(!txtCodigo.getText().trim().equals("")){
 					    int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminiar este registro?","Sistema Académico", JOptionPane.YES_NO_OPTION);
 					    if (respuesta == JOptionPane.YES_OPTION) {
 					    	eliminar();
@@ -757,9 +727,9 @@ public class panelProducto extends JPanel {
 			btEditar.setHorizontalAlignment(SwingConstants.LEFT);
 			btEditar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
-					if (!txtCedula.getText().trim().equals("")){
-						ced=txtCedula.getText().trim(); //captura la cédula antes de modificar
-						txtCedula.requestFocus();  //envia curso o enfoque a la caja de texto cedula
+					if (!txtCodigo.getText().trim().equals("")){
+						ced=txtCodigo.getText().trim(); //captura la cédula antes de modificar
+						txtCodigo.requestFocus();  //envia curso o enfoque a la caja de texto cedula
 				        frmPrincipal.lbMensaje.setText("");
 						//habilitar textos
 				        habilitar_textos(true);
@@ -804,6 +774,34 @@ public class panelProducto extends JPanel {
 			});
 		}
 		return btCancelar;
+	}
+
+	/**
+	 * This method initializes txtPrecio
+	 *
+	 * @return javax.swing.JTextField
+	 */
+	private JTextField getTxtPrecio() {
+		if (txtPrecio == null) {
+			txtPrecio = new JTextField();
+			txtPrecio.setSize(new Dimension(115, 26));
+			txtPrecio.setLocation(new Point(418, 175));
+		}
+		return txtPrecio;
+	}
+
+	/**
+	 * This method initializes txtIva
+	 *
+	 * @return javax.swing.JTextField
+	 */
+	private JTextField getTxtIva() {
+		if (txtIva == null) {
+			txtIva = new JTextField();
+			txtIva.setSize(new Dimension(114, 28));
+			txtIva.setLocation(new Point(418, 113));
+		}
+		return txtIva;
 	}
 
 
