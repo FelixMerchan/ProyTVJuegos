@@ -188,7 +188,7 @@ public class frmPrincipal extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					panelCentral.removeAll();
 					try{
-					//panelCentral.add(new panelEstudiante(),"Estudiante");
+					panelCentral.add(new panelCliente(),"Cliente");
 					}catch(Exception ex){}
 					panelCentral.repaint();
 				}
