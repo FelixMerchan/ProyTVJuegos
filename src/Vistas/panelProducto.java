@@ -38,20 +38,18 @@ public class panelProducto extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton btGuardar = null;
 	private JPanel paneldatos = null;
-	private JLabel lbcedula = null;
-	private JLabel lbapellido = null;
-	private JLabel lbbombre = null;
+	private JLabel lbCodigo = null;
+	private JLabel lbNombre = null;
+	private JLabel lbDescripcion = null;
 	private JTextField txtCedula = null;
 	private JTextField txtApellidos = null;
 	private JTextField txtNombres = null;
-	private JLabel Genero = null;
+	private JLabel lbMarca = null;
 	private JTextField txtDireccion = null;
-	private JRadioButton rbMasculino = null;
-	private JRadioButton rbFemenino = null;
-	private JLabel lbdireccion = null;
-	private JLabel lbpadre = null;
+	private JLabel lbCategoria = null;
+	private JLabel lbCantidadStock = null;
 	private JTextField txtPadre = null;
-	private JLabel lbmadre = null;
+	private JLabel lbPrecio = null;
 	private JTextField txtMadre = null;
 
 
@@ -346,60 +344,58 @@ public class panelProducto extends JPanel {
 	 */
 	private JPanel getPaneldatos() {
 		if (paneldatos == null) {
-			lbmadre = new JLabel();
-			lbmadre.setBounds(new Rectangle(16, 207, 84, 20));
-			lbmadre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbmadre.setText("Madre:");
-			lbpadre = new JLabel();
-			lbpadre.setBounds(new Rectangle(16, 174, 84, 25));
-			lbpadre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbpadre.setText("Padre:");
-			lbdireccion = new JLabel();
-			lbdireccion.setBounds(new Rectangle(16, 142, 84, 25));
-			lbdireccion.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbdireccion.setText("Direccción:");
-			Genero = new JLabel();
-			Genero.setBounds(new Rectangle(17, 113, 81, 25));
-			Genero.setFont(new Font("Dialog", Font.PLAIN, 12));
-			Genero.setText("Género:");
-			lbbombre = new JLabel();
-			lbbombre.setBounds(new Rectangle(18, 84, 82, 24));
-			lbbombre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbbombre.setText("Nombre:");
-			lbapellido = new JLabel();
-			lbapellido.setBounds(new Rectangle(19, 54, 82, 23));
-			lbapellido.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbapellido.setText("Apellidos:");
-			lbcedula = new JLabel();
-			lbcedula.setText("Cédula:");
-			lbcedula.setLocation(new Point(20, 27));
-			lbcedula.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbcedula.setSize(new Dimension(80, 20));
+			lbPrecio = new JLabel();
+			lbPrecio.setBounds(new Rectangle(16, 207, 118, 20));
+			lbPrecio.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbPrecio.setText("Precio de Venta:");
+			lbCantidadStock = new JLabel();
+			lbCantidadStock.setBounds(new Rectangle(16, 174, 121, 25));
+			lbCantidadStock.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbCantidadStock.setText("Cantidad en Stock:");
+			lbCategoria = new JLabel();
+			lbCategoria.setBounds(new Rectangle(16, 142, 84, 25));
+			lbCategoria.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbCategoria.setText("Categoría:");
+			lbMarca = new JLabel();
+			lbMarca.setBounds(new Rectangle(17, 113, 81, 25));
+			lbMarca.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbMarca.setText("Marca:");
+			lbDescripcion = new JLabel();
+			lbDescripcion.setBounds(new Rectangle(18, 84, 82, 24));
+			lbDescripcion.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbDescripcion.setText("Descripción:");
+			lbNombre = new JLabel();
+			lbNombre.setBounds(new Rectangle(19, 54, 82, 23));
+			lbNombre.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbNombre.setText("Nombre:");
+			lbCodigo = new JLabel();
+			lbCodigo.setText("Código:");
+			lbCodigo.setLocation(new Point(20, 27));
+			lbCodigo.setFont(new Font("Dialog", Font.PLAIN, 12));
+			lbCodigo.setSize(new Dimension(80, 20));
 			paneldatos = new JPanel();
 			paneldatos.setLayout(null);
 			paneldatos.setBounds(new Rectangle(15, 53, 546, 242));
 			paneldatos.setBorder(BorderFactory.createTitledBorder(null, "Datos de Productos", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
-			paneldatos.add(lbcedula, null);
-			paneldatos.add(lbapellido, null);
-			paneldatos.add(lbbombre, null);
+			paneldatos.add(lbCodigo, null);
+			paneldatos.add(lbNombre, null);
+			paneldatos.add(lbDescripcion, null);
 			paneldatos.add(getTxtCedula(), null);
 			paneldatos.add(getTxtApellidos(), null);
 			paneldatos.add(getTxtNombres(), null);
-			paneldatos.add(Genero, null);
+			paneldatos.add(lbMarca, null);
 			paneldatos.add(getTxtDireccion(), null);
 
-			paneldatos.add(lbdireccion, null);
-			paneldatos.add(lbpadre, null);
+			paneldatos.add(lbCategoria, null);
+			paneldatos.add(lbCantidadStock, null);
 
-			paneldatos.add(getRbMasculino(), null);
-			paneldatos.add(getRbFemenino(), null);
 			ButtonGroup grupoGenero = new ButtonGroup();
 			grupoGenero.add(rbMasculino);
 			grupoGenero.add(rbFemenino);
 
 
 			paneldatos.add(getTxtPadre(), null);
-			paneldatos.add(lbmadre, null);
+			paneldatos.add(lbPrecio, null);
 			paneldatos.add(getTxtMadre(), null);
 			paneldatos.add(getBtBuscar(), null);
 		}
@@ -482,35 +478,6 @@ public class panelProducto extends JPanel {
 			});
 		}
 		return txtDireccion;
-	}
-
-	/**
-	 * This method initializes rbMasculino
-	 *
-	 * @return javax.swing.JRadioButton
-	 */
-	private JRadioButton getRbMasculino() {
-		if (rbMasculino == null) {
-			rbMasculino = new JRadioButton();
-			rbMasculino.setBounds(new Rectangle(283, 117, 91, 20));
-			rbMasculino.setText("Masculino");
-		}
-		return rbMasculino;
-	}
-
-	/**
-	 * This method initializes rbFemenino
-	 *
-	 * @return javax.swing.JRadioButton
-	 */
-	private JRadioButton getRbFemenino() {
-		if (rbFemenino == null) {
-			rbFemenino = new JRadioButton();
-			rbFemenino.setText("Femenino");
-			rbFemenino.setSelected(true);
-			rbFemenino.setBounds(new Rectangle(180, 117, 80, 24));
-		}
-		return rbFemenino;
 	}
 
 	/**
