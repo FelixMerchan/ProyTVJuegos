@@ -33,7 +33,7 @@ import javax.swing.JTable;
 public class panelProducto extends JPanel {
 	//datos globales
 	public cProducto list=new cProducto();  //  @jve:decl-index=0:
-	String ced=""; //para editar  //  @jve:decl-index=0:
+	String codigo=""; //para editar  //  @jve:decl-index=0:
 
 	private static final long serialVersionUID = 1L;
 	private JButton btGuardar = null;
@@ -69,6 +69,7 @@ public class panelProducto extends JPanel {
 	private JTextField txtPrecio = null;
 	private JLabel lbIva = null;
 	private JTextField txtIva = null;
+	private JLabel jLabel = null;
 
 
 	/**********************METODOS PERSONALIZADOS ********************/
@@ -84,8 +85,10 @@ public class panelProducto extends JPanel {
             ob.nombre=txtNombre.getText();
             ob.descripcion=txtDescripcion.getText();
             ob.marca=txtMarca.getText();
-            ob.cantidad=txtCantidad.getText();
             ob.categoria=txtCategoria.getText();
+            ob.cantidad=Double.parseDouble(txtCantidad.getText());
+            ob.precio=Double.parseDouble(txtPrecio.getText());
+            ob.iva=Integer.parseInt(txtIva.getText());
             System.out.print(ob.toString());
         }
         return ob;
@@ -98,24 +101,39 @@ public class panelProducto extends JPanel {
         boolean ok=true;
         String men="Campos con errores";
         //validar requerido
-        if(!Validaciones.esCedula(txtCodigo)){
+        if(!Validaciones.esRequerido(txtCodigo)){
             ok=false;
-            men += ", Cedula";
+            men += ", Codigo";
         }
 
-        if(!Validaciones.esLetras(txtDescripcion)){
+        if(!Validaciones.esRequerido(txtNombre)){
             ok=false;
-            men += ", Nombre";
+            men += ", Nombre del producto";
         }
 
-        if(!Validaciones.esLetras(txtNombre)){
+        if(!Validaciones.esLetras(txtCategoria)){
             ok=false;
-            men += ", Apellido";
+            men += ", Categoria";
         }
 
         if(!Validaciones.esRequerido(txtMarca)){
             ok=false;
             men += ", Dirección";
+        }
+
+        if(!Validaciones.esFlotante(txtCantidad)){
+            ok=false;
+            men += ", Cantidad";
+        }
+
+        if(!Validaciones.esFlotante(txtPrecio)){
+            ok=false;
+            men += ", Precio";
+        }
+        //validacion de enteros
+        if(!Validaciones.esNumero(txtIva)){
+            ok=false;
+            men += ", Iva";
         }
 
         if(!ok)frmPrincipal.lbMensaje.setText(men);
@@ -154,7 +172,7 @@ public class panelProducto extends JPanel {
     }
 
     /*
-     * Ver registro
+     * Ver registro visual en el formulario los datos del objeto
      */
     public void ver_registro(int pos)
     {
@@ -165,14 +183,17 @@ public class panelProducto extends JPanel {
             txtNombre.setText(ob.nombre);
             txtDescripcion.setText(ob.descripcion);
             txtMarca.setText(ob.marca);
-            txtCantidad.setText(ob.cantidad);
             txtCategoria.setText(ob.categoria);
+            //cantidad + "" convierte un numero en texto
+            txtCantidad.setText(ob.cantidad + "");
+            txtPrecio.setText(ob.precio + "");
+            txtIva.setText(ob.iva + "");
 
         }
     }
 
     /*
-     * Buscar datos segun cedula
+     * Buscar datos segun codigo
      */
     public void buscar(){
     	try{
@@ -194,11 +215,11 @@ public class panelProducto extends JPanel {
     	Producto ob=leer();
 		try{
 			if(ob!=null){
-				if (ced.equals("")){//guardar un nuevo Producto
+				if (codigo.equals("")){//guardar un nuevo Producto
 					list.nuevo(ob);
 				}
 				else{//guardar datos de Producto editado
-					list.modificar(ob,ced);
+					list.modificar(ob,codigo);
 				}
 				frmPrincipal.lbMensaje.setText("Registro guardado exitosamente");
 				list.guardar(); //guarda en el archivo csv
@@ -222,7 +243,10 @@ public class panelProducto extends JPanel {
         try{
             cProducto p=list.buscar_codigo(txtDato.getText()); //busca por codigo
             if(p.Count()==0)p=list.buscar_nombre(txtDato.getText()); //buscar por nombre
-            tabla.setModel(p.getTabla());
+            if(p.Count()==0)p=list.buscar_marca(txtDato.getText()); // buscar por marca
+            if(p.Count()==0)p=list.buscar_categoria(txtDato.getText()); //buscar por categoria
+
+            tabla.setModel(p.getTabla()); // cargar en la tabla los doatos encontrados
         }catch(Exception ex){frmPrincipal.lbMensaje.setText(ex.getMessage());}
     }
 
@@ -278,7 +302,7 @@ public class panelProducto extends JPanel {
 	public panelProducto() throws IOException {
 		super();
 		initialize();
-		list.leer();
+		list.leer(); // leer datos desde el archivo
 		//formato de la tabla
 		tabla.getTableHeader().setBackground(new Color(100, 200, 200));
         tabla.getTableHeader().setForeground(Color.BLACK);
@@ -344,20 +368,23 @@ public class panelProducto extends JPanel {
 	 */
 	private JPanel getPaneldatos() {
 		if (paneldatos == null) {
+			jLabel = new JLabel();
+			jLabel.setBounds(new Rectangle(17, 210, 190, 23));
+			jLabel.setText("* Campo obligatorio o requerido");
 			lbIva = new JLabel();
 			lbIva.setBounds(new Rectangle(329, 114, 58, 24));
 			lbIva.setText("Iva:");
 			lbPrecio = new JLabel();
 			lbPrecio.setBounds(new Rectangle(287, 173, 118, 26));
-			lbPrecio.setText("Precio de Venta:");
+			lbPrecio.setText("*Precio de Venta:");
 			lbCantidad = new JLabel();
 			lbCantidad.setBounds(new Rectangle(16, 174, 109, 25));
 			lbCantidad.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbCantidad.setText("Cantidad en Stock");
+			lbCantidad.setText("*Cantidad en Stock");
 			lbCategoria = new JLabel();
 			lbCategoria.setBounds(new Rectangle(16, 142, 84, 25));
 			lbCategoria.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbCategoria.setText("Categoria");
+			lbCategoria.setText("*Categoria");
 			lbMarca = new JLabel();
 			lbMarca.setBounds(new Rectangle(17, 113, 81, 25));
 			lbMarca.setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -369,15 +396,15 @@ public class panelProducto extends JPanel {
 			lbNombre = new JLabel();
 			lbNombre.setBounds(new Rectangle(19, 54, 82, 23));
 			lbNombre.setFont(new Font("Dialog", Font.PLAIN, 12));
-			lbNombre.setText("Nombre:");
+			lbNombre.setText("*Nombre:");
 			lbCodigo = new JLabel();
-			lbCodigo.setText("Código:");
+			lbCodigo.setText("*Código:");
 			lbCodigo.setLocation(new Point(20, 27));
 			lbCodigo.setFont(new Font("Dialog", Font.PLAIN, 12));
 			lbCodigo.setSize(new Dimension(80, 20));
 			paneldatos = new JPanel();
 			paneldatos.setLayout(null);
-			paneldatos.setBounds(new Rectangle(19, 62, 546, 219));
+			paneldatos.setBounds(new Rectangle(19, 62, 546, 241));
 			paneldatos.setBorder(BorderFactory.createTitledBorder(null, "Datos de Productos", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, new Font("Dialog", Font.BOLD, 12), new Color(51, 51, 51)));
 			paneldatos.add(lbCodigo, null);
 			paneldatos.add(lbNombre, null);
@@ -401,6 +428,7 @@ public class panelProducto extends JPanel {
 			paneldatos.add(getTxtPrecio(), null);
 			paneldatos.add(lbIva, null);
 			paneldatos.add(getTxtIva(), null);
+			paneldatos.add(jLabel, null);
 		}
 		return paneldatos;
 	}
@@ -419,7 +447,7 @@ public class panelProducto extends JPanel {
 			txtCodigo.setSize(new Dimension(176, 25));
 			txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
 				public void keyReleased(java.awt.event.KeyEvent e) {
-					if(Validaciones.esCedula(txtCodigo)) Validaciones.pinta_text(txtCodigo);
+					if(Validaciones.esRequerido(txtCodigo)) Validaciones.pinta_text(txtCodigo);
 				}
 			});
 		}
@@ -438,7 +466,7 @@ public class panelProducto extends JPanel {
 			txtNombre.setLocation(new Point(179, 54));
 			txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
 				public void keyReleased(java.awt.event.KeyEvent e) {
-					if(Validaciones.esLetras(txtNombre)) Validaciones.pinta_text(txtNombre);
+					if(Validaciones.esRequerido(txtNombre)) Validaciones.pinta_text(txtNombre);
 				}
 			});
 		}
@@ -455,11 +483,6 @@ public class panelProducto extends JPanel {
 			txtDescripcion = new JTextField();
 			txtDescripcion.setLocation(new Point(179, 82));
 			txtDescripcion.setSize(new Dimension(330, 25));
-			txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
-				public void keyReleased(java.awt.event.KeyEvent e) {
-					if(Validaciones.esLetras(txtDescripcion)) Validaciones.pinta_text(txtDescripcion);
-				}
-			});
 		}
 		return txtDescripcion;
 	}
@@ -474,11 +497,6 @@ public class panelProducto extends JPanel {
 			txtMarca = new JTextField();
 			txtMarca.setLocation(new Point(179, 114));
 			txtMarca.setSize(new Dimension(137, 25));
-			txtMarca.addKeyListener(new java.awt.event.KeyAdapter() {
-				public void keyReleased(java.awt.event.KeyEvent e) {
-					if(Validaciones.esRequerido(txtMarca)) Validaciones.pinta_text(txtMarca);
-				}
-			});
 		}
 		return txtMarca;
 	}
@@ -493,6 +511,12 @@ public class panelProducto extends JPanel {
 			txtCategoria = new JTextField();
 			txtCategoria.setLocation(new Point(179, 142));
 			txtCategoria.setSize(new Dimension(133, 25));
+			txtCategoria.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyReleased(java.awt.event.KeyEvent e) {
+					//System.out.println("keyReleased()"); // TODO Auto-generated Event stub keyReleased()
+					if(Validaciones.esLetras(txtCategoria)) Validaciones.pinta_text(txtCategoria);
+				}
+			});
 		}
 		return txtCategoria;
 	}
@@ -507,6 +531,12 @@ public class panelProducto extends JPanel {
 			txtCantidad = new JTextField();
 			txtCantidad.setLocation(new Point(179, 172));
 			txtCantidad.setSize(new Dimension(97, 25));
+			txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyReleased(java.awt.event.KeyEvent e) {
+					//System.out.println("keyReleased()"); // TODO Auto-generated Event stub keyReleased()
+					if(Validaciones.esFlotante(txtCantidad)) Validaciones.pinta_text(txtCantidad);
+				}
+			});
 		}
 		return txtCantidad;
 	}
@@ -529,7 +559,7 @@ public class panelProducto extends JPanel {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					quitar_validaciones();
 					limpiar_textos();
-					ced=""; //nuevo
+					codigo=""; //nuevo
 					//habilitar textos
 			        habilitar_textos(true);
 			        //deshabilitar botones
@@ -728,7 +758,7 @@ public class panelProducto extends JPanel {
 			btEditar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					if (!txtCodigo.getText().trim().equals("")){
-						ced=txtCodigo.getText().trim(); //captura la cédula antes de modificar
+						codigo=txtCodigo.getText().trim(); //captura la cédula antes de modificar
 						txtCodigo.requestFocus();  //envia curso o enfoque a la caja de texto cedula
 				        frmPrincipal.lbMensaje.setText("");
 						//habilitar textos
@@ -767,7 +797,7 @@ public class panelProducto extends JPanel {
 			        //habilitar botones
 			        habilitar_botones(true);
 			        //cargar registro anterior a la modificación
-			        int pos=list.localizar(ced);
+			        int pos=list.localizar(codigo);
 			        if(pos>=0)ver_registro(pos);
 			        else limpiar_textos();
 				}
@@ -786,6 +816,12 @@ public class panelProducto extends JPanel {
 			txtPrecio = new JTextField();
 			txtPrecio.setSize(new Dimension(115, 26));
 			txtPrecio.setLocation(new Point(418, 175));
+			txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyReleased(java.awt.event.KeyEvent e) {
+					//System.out.println("keyReleased()"); // TODO Auto-generated Event stub keyReleased()
+					if(Validaciones.esFlotante(txtPrecio)) Validaciones.pinta_text(txtPrecio);
+				}
+			});
 		}
 		return txtPrecio;
 	}
@@ -800,6 +836,12 @@ public class panelProducto extends JPanel {
 			txtIva = new JTextField();
 			txtIva.setSize(new Dimension(114, 28));
 			txtIva.setLocation(new Point(418, 113));
+			txtIva.addKeyListener(new java.awt.event.KeyAdapter() {
+				public void keyReleased(java.awt.event.KeyEvent e) {
+					//System.out.println("keyReleased()"); // TODO Auto-generated Event stub keyReleased()
+					if(Validaciones.esNumero(txtIva)) Validaciones.pinta_text(txtIva);
+				}
+			});
 		}
 		return txtIva;
 	}

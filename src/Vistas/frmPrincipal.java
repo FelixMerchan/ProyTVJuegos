@@ -188,7 +188,7 @@ public class frmPrincipal extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					panelCentral.removeAll();
 					try{
-					//panelCentral.add(new panelEstudiante(),"Estudiante");
+					//panelCentral.add(new panelCliente(),"Cliente");
 					}catch(Exception ex){}
 					panelCentral.repaint();
 				}
@@ -224,7 +224,9 @@ public class frmPrincipal extends JFrame {
 			btProducto.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					panelCentral.removeAll();
-					//panelCentral.add(new panelRepresentante(),"Representante");
+					try{
+					panelCentral.add(new panelProducto(),"Producto");
+					}catch(Exception ex){}
 					panelCentral.repaint();
 				}
 			});

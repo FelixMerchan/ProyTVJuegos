@@ -180,6 +180,20 @@ public class cProducto {
 		}
 		return ob;
 	}
+	public cProducto buscar_categoria(String categoria) throws IOException{
+		cProducto ob=new cProducto();
+		for(int i=0; i<Lista.size(); i++){
+			String cad="";
+			Producto e=(Producto)Lista.get(i);
+			if(e.marca.length() >= categoria.length()){
+				cad=e.marca.substring(0, categoria.length());
+				if(cad.equalsIgnoreCase(categoria)){
+					ob.nuevo(e);
+				}
+			}
+		}
+		return ob;
+	}
 
 
 
@@ -232,7 +246,7 @@ public class cProducto {
 	           line = br.readLine(); //leer el siguiente registro
 	        }
 	     } catch (Exception e) {
-
+	    	 
 	     } finally {
 	        if (null!=br) {
 	           br.close();
